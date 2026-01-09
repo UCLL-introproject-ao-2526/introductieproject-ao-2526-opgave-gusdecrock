@@ -6,3 +6,6 @@ Deal hand knop en de dealer kaarten en player kaarten gemaakt. Vond een fout in 
 
 ## 8 jan 2318
 Tutorial gevolgd. Had kleine foutjes zoals (....,) en 2 regels vergeten maar uiteindelijk werkt het.
+
+## 9 jan 1534 
+heb de tafel een andere kleur gegeven meer casino achtig groen. Had geprobeerd een split knop te inplementeren maar werkte niet.

@@ -155,9 +155,10 @@ def check_endgame(hand_act, deal_score, play_score, result, totals, add):
 # main game loop
 run = True
 while run:
-    # run game at our framerate and fill screen with bg color
+    # run game at our framerate and fill screen with bg color groen!!!
     timer.tick(fps)
-    screen.fill('black')
+    screen.fill((0, 120, 0))  # casino groen
+    pygame.draw.rect(screen, (0, 90, 0), [20, 140, 560, 560], border_radius=20)
     # initial deal to player and dealer
     if initial_deal:
         for i in range(2):
