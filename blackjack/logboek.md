@@ -9,3 +9,6 @@ Tutorial gevolgd. Had kleine foutjes zoals (....,) en 2 regels vergeten maar uit
 
 ## 9 jan 1534 
 heb de tafel een andere kleur gegeven meer casino achtig groen. Had geprobeerd een split knop te inplementeren maar werkte niet.
+
+## 9 jan 1951
+Kleuren en font verbeterd en een deal card draw sound toegevoegd.

@@ -1,6 +1,7 @@
 import copy 
 import random
 import pygame
+pygame.mixer.init()
 
 pygame.font.init()
 # game variables
@@ -13,8 +14,8 @@ screen = pygame.display.set_mode([WIDTH, HEIGHT])
 pygame.display.set_caption('Pygame Blackjack!')
 fps = 60 
 timer = pygame.time.Clock()
-font = pygame.font.SysFont('Arial', 44)
-smaller_font = pygame.font.SysFont('Arial', 39)
+font = pygame.font.SysFont('Verdana', 42, bold=True)
+smaller_font = pygame.font.SysFont('Verdana', 30)
 active = False
 # win, loss, draw
 records = [0, 0, 0]
@@ -29,20 +30,26 @@ hand_active = False
 outcome = 0
 add_scores = False
 results = ['', 'PLAYER BUSTED :/', 'PLAYER WINS! :)', 'DEALER WINS :(', 'TIE GAME...' ]
+deal_sfx = pygame.mixer.Sound('sounds/deal.mp3')
+deal_sfx.set_volume(0.02)
 
 # deal cards by selecting randomly from deck, and make function for one card at a time
 def deal_cards(current_hand, current_deck):
     card = random.randint(0, len(current_deck))
     current_hand.append(current_deck[card - 1])
     current_deck.pop(card - 1)
+    deal_sfx.play()
     return current_hand, current_deck
+
+
 
 
 # draw scores for player and dealer on screen 
 def draw_scores(player, dealer):
-    screen.blit(font.render(f'Score[{player}]', True, 'white'), (350, 400))
+    screen.blit(font.render(f'PLAYER: {player}', True, 'white'), (310, 410))
     if reveal_dealer:
-        screen.blit(font.render(f'Score[{dealer}]', True, 'white'), (350, 100))
+        screen.blit(font.render(f'DEALER: {dealer}', True, 'white'), (310, 110))
+
 
 
 #draw cards cisually onto screen
@@ -157,8 +164,12 @@ run = True
 while run:
     # run game at our framerate and fill screen with bg color groen!!!
     timer.tick(fps)
-    screen.fill((0, 120, 0))  # casino groen
-    pygame.draw.rect(screen, (0, 90, 0), [20, 140, 560, 560], border_radius=20)
+    # achtergrond
+    screen.fill((18, 32, 47))  # donker blauw
+    # tafel
+    pygame.draw.rect(screen, (39, 174, 96), [20, 140, 560, 560], border_radius=30)
+    pygame.draw.rect(screen, (20, 120, 70), [20, 140, 560, 560], 4, border_radius=30)
+
     # initial deal to player and dealer
     if initial_deal:
         for i in range(2):
