@@ -1,0 +1,24 @@
+Reflectie bij video
+https://www.youtube.com/watch?v=iwUR0kOVNs8
+
+
+
+In de video “Test all the f**ing time”* legt Bryan Liles de spreker uit waarom testen zo belangrijk is bij programmeren.
+Zijn boodschap is dat testen niet iets extra is maar iets wat je nonstop moet doen. 
+Veel mensen stellen testen uit tot het einde, of doen het helemaal niet en dat zorgt dan voor grote problemen.
+
+
+Een van zijn punten is dat testen ervoor zorgt dat je meer vertrouwen hebt in je code. 
+Wanneer je test durf je sneller dingen aan te passen omdat je direct ziet of er iets fout loopt. 
+Zonder testen ben je vaak bang om code te veranderen omdat je niet weet of je iets misschien kapot maakt.
+Hij zegt ook dat testen je helpt om problemen sneller te vinden. 
+
+Hij zegt dat tests helpen om code beter te begrijpen, vooral als meerdere mensen aan hetzelfde project werken. 
+Tests tonen hoe de code zou moeten werken. Verder zegt hij dat testen op lange termijn tijd bespaart. 
+Hoewel het schrijven van tests in het begin extra werk lijkt, win je die tijd later terug omdat je minder fouten moet verbeteren.
+
+Tot slot vertelt hij dat testen vaak wordt gezien als saai, terwijl het volgens hem net een teken is dat je je werk serieus neemt als programmeur.
+
+
+Ik ben het zelf eens met wat de spreker zegt. Ik kan veel leren van deze video, want ik test eigenlijk zelf niet zo veel.
+
