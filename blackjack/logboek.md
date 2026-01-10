@@ -12,3 +12,6 @@ heb de tafel een andere kleur gegeven meer casino achtig groen. Had geprobeerd e
 
 ## 9 jan 1951
 Kleuren en font verbeterd en een deal card draw sound toegevoegd.
+
+## 10 jan 1814 
+knoppen met hover toegevoegd en een soort van kaart animatie. ga nog proberen sounds toe te voegen voor win en loss

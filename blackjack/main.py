@@ -32,6 +32,12 @@ add_scores = False
 results = ['', 'PLAYER BUSTED :/', 'PLAYER WINS! :)', 'DEALER WINS :(', 'TIE GAME...' ]
 deal_sfx = pygame.mixer.Sound('sounds/deal.mp3')
 deal_sfx.set_volume(0.02)
+win_sfx = pygame.mixer.Sound('sounds/youwin.mp3')
+lose_sfx = pygame.mixer.Sound('sounds/ohno.mp3')
+card_anim_y = -300
+card_anim_speed = 25
+
+
 
 # deal cards by selecting randomly from deck, and make function for one card at a time
 def deal_cards(current_hand, current_deck):
@@ -55,20 +61,20 @@ def draw_scores(player, dealer):
 #draw cards cisually onto screen
 def draw_cards(player, dealer, reveal):
     for i in range(len(player)):
-        pygame.draw.rect(screen, 'white', [70 + (70 * i), 460 + (5 * i), 120, 220], 0, 5)
-        screen.blit(font.render(player[i], True, 'black'), (75 + 70 * i, 465 + 5 * i))
-        screen.blit(font.render(player[i], True, 'black'), (75 + 70 * i, 635 + 5 * i))
+        pygame.draw.rect(screen, 'white', [70 + (70 * i), 460 + (5 * i) + card_anim_y, 120, 220], 0, 5)
+        screen.blit(font.render(player[i], True, 'black'), (75 + 70 * i, 465 + 5 * i + card_anim_y))
+        screen.blit(font.render(player[i], True, 'black'), (75 + 70 * i, 635 + 5 * i + card_anim_y))
         pygame.draw.rect(screen, 'red', [70 + (70 * i), 460 + (5 * i), 120, 220], 5, 5)
     
     #if player hasn't finished turn, dealer will hide one card 
     for i in range(len(dealer)):
-        pygame.draw.rect(screen, 'white', [70 + (70 * i), 160 + (5 * i), 120, 220], 0, 5)
+        pygame.draw.rect(screen, 'white', [70 + (70 * i), 160 + (5 * i) + card_anim_y, 120, 220], 0, 5)
         if i != 0 or reveal:
-            screen.blit(font.render(dealer[i], True, 'black'), (75 + 70 * i, 165 + 5 * i))
-            screen.blit(font.render(dealer[i], True, 'black'), (75 + 70 * i, 335 + 5 * i))
+            screen.blit(font.render(dealer[i], True, 'black'), (75 + 70 * i, 165 + 5 * i + card_anim_y))
+            screen.blit(font.render(dealer[i], True, 'black'), (75 + 70 * i, 335 + 5 * i + card_anim_y))
         else: 
-            screen.blit(font.render('???', True, 'black'), (75 + 70 * i, 165 + 5 * i))
-            screen.blit(font.render('???', True, 'black'), (75 + 70 * i, 335 + 5 * i))
+            screen.blit(font.render('???', True, 'black'), (75 + 70 * i, 165 + 5 * i + card_anim_y))
+            screen.blit(font.render('???', True, 'black'), (75 + 70 * i, 335 + 5 * i + card_anim_y))
 
         pygame.draw.rect(screen, 'blue', [70 + (70 * i), 160 + (5 * i), 120, 220], 5, 5)
     
@@ -111,16 +117,26 @@ def draw_game(act, record, result):
         button_list.append(deal)
     # once game started, shot hit and stand buttons and win/loss records
     else:
-        hit = pygame.draw.rect(screen, 'white', [0, 700, 300, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [0, 700, 300, 100], 3, 5)
-        hit_text = font.render('HIT ME', True, 'black')
-        screen.blit(hit_text, (55, 735))
+        hit = pygame.draw.rect(screen, 'white', [0, 700, 300, 100], 0, 12)
+        if hit.collidepoint(pygame.mouse.get_pos()):
+            pygame.draw.rect(screen, (46, 204, 113), hit, 4, 12)  # licht groen
+        else:
+             pygame.draw.rect(screen, (39, 174, 96), hit, 3, 12)  # donker groen
+        hit_text = font.render('HIT ME', True, (20, 20, 20))
+        screen.blit(hit_text, (110, 735))
         button_list.append(hit)
-        stand = pygame.draw.rect(screen, 'white', [300, 700, 300, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [300, 700, 300, 100], 3, 5)
-        stand_text = font.render('STAND', True, 'black')
-        screen.blit(stand_text, (355, 735))
+        stand = pygame.draw.rect(screen, 'white', [300, 700, 300, 100], 0, 12)
+
+        if stand.collidepoint(pygame.mouse.get_pos()):
+            pygame.draw.rect(screen, (231, 76, 60), stand, 4, 12)  # rood hover
+        else:
+            pygame.draw.rect(screen, (192, 57, 43), stand, 3, 12)
+
+        stand_text = font.render('STAND', True, (20, 20, 20))
+        screen.blit(stand_text, (380, 735))
+
         button_list.append(stand)
+
         score_text = smaller_font.render(f'Wins: {record[0]}   Losses: {record[1]}   Draws: {record[2]}', True, 'white')
         screen.blit(score_text, (15, 840))
     # if there is an outcome for hand that was played, display a restart button and tell user what happend
@@ -179,6 +195,11 @@ while run:
     # once game is activated, and dealt, calculate scores and display cards
     if active:
         player_score = calculate_score(my_hand)
+        if card_anim_y < 0:
+            card_anim_y += card_anim_speed
+            if card_anim_y > 0:
+                card_anim_y = 0
+
         draw_cards(my_hand, dealer_hand, reveal_dealer)
         if reveal_dealer:
             dealer_score = calculate_score(dealer_hand)
@@ -194,6 +215,7 @@ while run:
         if event.type == pygame.MOUSEBUTTONUP:
             if not active:
                 if buttons[0].collidepoint(event.pos):
+                    card_anim_y = -300
                     active = True
                     initial_deal = True
                     game_deck = copy.deepcopy(decks * one_deck) 
@@ -208,12 +230,14 @@ while run:
                 # if player can hit, allow them to draw a card
                 if buttons[0].collidepoint(event.pos) and player_score < 21 and hand_active:
                     my_hand, game_deck = deal_cards(my_hand, game_deck)
+                    card_anim_y
                 # allow player to end turn (stand)
                 elif buttons [1].collidepoint(event.pos) and not reveal_dealer:
                     reveal_dealer = True
                     hand_active = False
                 elif len(buttons) == 3:
                     if buttons[2].collidepoint(event.pos):
+                        card_anim_y = -300
                         active = True
                         initial_deal = True
                         game_deck = copy.deepcopy(decks * one_deck) 
