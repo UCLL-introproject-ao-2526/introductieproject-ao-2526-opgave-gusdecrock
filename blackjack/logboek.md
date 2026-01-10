@@ -15,3 +15,6 @@ Kleuren en font verbeterd en een deal card draw sound toegevoegd.
 
 ## 10 jan 1814 
 knoppen met hover toegevoegd en een soort van kaart animatie. ga nog proberen sounds toe te voegen voor win en loss
+
+## 10 jan 1855
+muis hover bij de knoppen, text gecentraliseerd, win en lose sound en een kleine delay op dealers kaarten.

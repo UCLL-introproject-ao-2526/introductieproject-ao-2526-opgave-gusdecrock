@@ -123,7 +123,7 @@ def draw_game(act, record, result):
         else:
              pygame.draw.rect(screen, (39, 174, 96), hit, 3, 12)  # donker groen
         hit_text = font.render('HIT ME', True, (20, 20, 20))
-        screen.blit(hit_text, (110, 735))
+        screen.blit(hit_text, (60, 735))
         button_list.append(hit)
         stand = pygame.draw.rect(screen, 'white', [300, 700, 300, 100], 0, 12)
 
@@ -133,7 +133,7 @@ def draw_game(act, record, result):
             pygame.draw.rect(screen, (192, 57, 43), stand, 3, 12)
 
         stand_text = font.render('STAND', True, (20, 20, 20))
-        screen.blit(stand_text, (380, 735))
+        screen.blit(stand_text, (370, 735))
 
         button_list.append(stand)
 
@@ -166,8 +166,10 @@ def check_endgame(hand_act, deal_score, play_score, result, totals, add):
         if add:
             if result == 1 or result == 3:
                 totals[1] += 1
+                lose_sfx.play()
             elif result == 2:
                 totals[0] += 1
+                win_sfx.play()
             else:
                 totals[2] += 1
             add = False
@@ -204,9 +206,20 @@ while run:
         if reveal_dealer:
             dealer_score = calculate_score(dealer_hand)
             if dealer_score < 17:
+                pygame.time.delay(500)
                 dealer_hand, game_deck = deal_cards(dealer_hand, game_deck)
         draw_scores(player_score, dealer_score)
     buttons = draw_game(active, records, outcome)
+    mouse_over_button = False
+    for button in buttons:
+        if button.collidepoint(pygame.mouse.get_pos()):
+           mouse_over_button = True
+
+    if mouse_over_button:
+        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
+    else:
+        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
+
 
     # event handling, if quit pressed, then exit game
     for event in pygame.event.get():
