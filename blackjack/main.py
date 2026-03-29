@@ -8,6 +8,8 @@ pygame.font.init()
 cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 one_deck = 4 * cards 
 decks = 4
+# [dn] width and height van wat? SCREEN_WIDTH, SCREEN_HEIGHT
+# of zelfs SCREEN_SIZE = [600, 900]
 WIDTH = 600
 HEIGHT = 900
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
@@ -24,10 +26,10 @@ dealer_score = 0
 initial_deal = False 
 my_hand = []
 dealer_hand = []
-outcome = 0
+outcome = 0 # [dn] cryptisch, ik weet niet wat dit betekent als ik het zie
 reveal_dealer = False
 hand_active = False
-outcome = 0
+outcome = 0 # [dn] dubbel
 add_scores = False
 results = ['', 'PLAYER BUSTED :/', 'PLAYER WINS! :)', 'DEALER WINS :(', 'TIE GAME...' ]
 deal_sfx = pygame.mixer.Sound('sounds/deal.mp3')
@@ -48,7 +50,7 @@ def deal_cards(current_hand, current_deck):
     return current_hand, current_deck
 
 
-
+# [dn] waarom zoveel whitespace??
 
 # draw scores for player and dealer on screen 
 def draw_scores(player, dealer):
@@ -56,12 +58,16 @@ def draw_scores(player, dealer):
     if reveal_dealer:
         screen.blit(font.render(f'DEALER: {dealer}', True, 'white'), (310, 110))
 
+# [dn] waarom zoveel whitespace??
 
-
+# [dn] typo :)
 #draw cards cisually onto screen
 def draw_cards(player, dealer, reveal):
     for i in range(len(player)):
         pygame.draw.rect(screen, 'white', [70 + (70 * i), 460 + (5 * i) + card_anim_y, 120, 220], 0, 5)
+        # [dn] volgende 2 regeels hebben wel heel veel gelijkennissen. Gebruik een methode of variabelen
+        # om jezelf niet te herhalen
+        # ok volgende blok. '70' komt minstenns 10 keer voor, dus lastig om te veranderen. maak een variabele
         screen.blit(font.render(player[i], True, 'black'), (75 + 70 * i, 465 + 5 * i + card_anim_y))
         screen.blit(font.render(player[i], True, 'black'), (75 + 70 * i, 635 + 5 * i + card_anim_y))
         pygame.draw.rect(screen, 'red', [70 + (70 * i), 460 + (5 * i), 120, 220], 5, 5)
