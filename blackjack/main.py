@@ -35,7 +35,7 @@ deal_sfx.set_volume(0.02)
 win_sfx = pygame.mixer.Sound('sounds/youwin.mp3')
 lose_sfx = pygame.mixer.Sound('sounds/ohno.mp3')
 card_anim_y = -300
-card_anim_speed = 25
+card_anim_speed = 1
 
 
 

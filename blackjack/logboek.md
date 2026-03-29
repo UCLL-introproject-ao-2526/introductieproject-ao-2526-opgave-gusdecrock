@@ -18,3 +18,6 @@ knoppen met hover toegevoegd en een soort van kaart animatie. ga nog proberen so
 
 ## 10 jan 1855
 muis hover bij de knoppen, text gecentraliseerd, win en lose sound en een kleine delay op dealers kaarten.
+
+## 29 mar 1800
+Ik ben het eens over de feedback. Er is wat herhaling en onduidelijke benamingen van variabels die ik beter een duidelijke naam had gegeven. Ook onnodige whitespace.
